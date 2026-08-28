@@ -1,0 +1,54 @@
+<main class="container">
+  <div class="cabecalho">
+    <h1>Livros</h1>
+    <button (click)="mostrarFormulario.set(true)">Criar livro</button>
+  </div>
+
+  @if (mostrarFormulario()) {
+  <section class="formulario-container">
+    <h2>Novo Livro</h2>
+    <form (ngSubmit)="salvarLivro()">
+      <div>
+        <label>Título:</label>
+        <input type="text" [(ngModel)]="novoLivro.titulo" name="titulo" required />
+      </div>
+
+      <div>
+        <label>Autor:</label>
+        <input type="text" [(ngModel)]="novoLivro.autor" name="autor" required />
+      </div>
+
+      <div>
+        <label>Categoria:</label>
+        <input type="text" [(ngModel)]="novoLivro.categoria" name="categoria" required />
+      </div>
+
+      <div>
+        <label>Ano:</label>
+        <input type="text" [(ngModel)]="novoLivro.ano" name="ano" required />
+      </div>
+
+      <div>
+        <label>Status:</label>
+        <select [(ngModel)]="novoLivro.status" name="status">
+          <option value="disponivel">Disponível</option>
+          <option value="alugado">Alugado</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Descrição:</label>
+        <textarea [(ngModel)]="novoLivro.descricao" name="descricao"></textarea>
+      </div>
+
+      <button type="submit">Salvar</button>
+      <button type="button" (click)="mostrarFormulario.set(false)">Cancelar</button>
+    </form>
+  </section>
+  }
+
+  <app-filtro-livros [pesquisa]="pesquisa()" [status]="filtroStatus()" (pesquisaChange)="atualizarPesquisa($event)"
+    (statusChange)="atualizarStatus($event)" />
+
+  <app-lista-livros [livros]="livrosFiltrados()" [carregando]="carregando()" [erro]="erro()" />
+</main>
