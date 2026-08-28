@@ -10,7 +10,7 @@ import { Livro } from "../models/livro";
 export class LivrosService {
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = "https://m7-livros-api-jq3k.onrender.com/api/livros"; // TODO
+  private readonly apiUrl = "https://m7-livros-api.onrender.com/api/livros";
 
   listar(): Promise<Livro[]> {
     return firstValueFrom(
